@@ -30,20 +30,22 @@ public class Main {
 		
 		for(int number = 0; number <= maxNumber; number++) 
 		{
-			String currentBinaryNumber = GenerateBinaryNumberFrom(number);
+			String currentBinaryNumber = GenerateBinaryNumberFrom(number, binaryValue.length());
 			
 			if(!IsInvalidPalindrome(currentBinaryNumber, maxSubstringLength)) 
-				numberOfValidStrings++;
+				numberOfValidStrings++;			
 		}	
 		return numberOfValidStrings;
 	}
 	
-	private static String GenerateBinaryNumberFrom(int number) 
+	private static String GenerateBinaryNumberFrom(int number, int maximumNumberOfBits) 
 	{
-		if(number == 0 || number == 1)
-			return "0" + Integer.toBinaryString(number);
+		String response = Integer.toBinaryString(number);
 		
-		return Integer.toBinaryString(number);
+		if(response.length() < maximumNumberOfBits) 
+			return AddZerosToBinaryLeftSide(response, maximumNumberOfBits);
+			
+		return response;
 	}
 
 	private static void PrintResultToUser(int response) 
@@ -83,5 +85,18 @@ public class Main {
 	{
 		String maximunBinaryPossible = binary.replace('0', '1');
 		return Integer.parseInt(maximunBinaryPossible, 2);
+	}
+
+	public static String AddZerosToBinaryLeftSide(String binaryNumber, int maximumNumberOfBitsAllowed) 
+	{
+		String zerosToAdd = "";
+		int numberOfZerosToAdd = maximumNumberOfBitsAllowed - binaryNumber.length();
+		
+		if(numberOfZerosToAdd > 0) 
+		{
+			for(int index = 0; index < numberOfZerosToAdd; index++) 
+				zerosToAdd = "0" + zerosToAdd;			
+		}
+		return zerosToAdd + binaryNumber;
 	}
 }
