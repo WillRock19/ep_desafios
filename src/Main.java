@@ -55,12 +55,8 @@ public class Main {
 
 	private static String CreateBinaryStringWithLength(int length) 
 	{
-		String binaryNumber = "";
-		
-		for(int index = 0; index < length; index++) 
-			binaryNumber = 0 + binaryNumber;
-
-		return binaryNumber;
+		char charThatRepresentsEmpty = '\0';
+		return new String(new char[length]).replace(charThatRepresentsEmpty, '0');
 	}
 	
 	private static boolean IsInvalidPalindrome(String binaryNumber, int palindromeMaxSize) 
